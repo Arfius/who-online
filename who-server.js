@@ -4,7 +4,7 @@ var WhoServer = function(options)
 	this.url_socket=options.url_socket;
 	this.refresh=options.time_refresh;
 	this.server_key=options.server_key;
-	this.output={};
+	
 
 	var socket = io.connect(this.url_socket);
 	var last_call=new Date().getTime();
@@ -23,15 +23,12 @@ var WhoServer = function(options)
 			socket.emit('moving',event);
 			last_call=now;
 		}
-	}
+	};
 	
-		
 	socket.on(this.server_key, function(data)
 	{   
-		console.log("data",data);
-		this.output=data
-		console.log("outp",this.output);
-
+		options.output=data
+		console.log("options.output",options.output);
 	});
 	
 
