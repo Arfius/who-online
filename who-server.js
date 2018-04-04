@@ -28,8 +28,10 @@ var WhoServer = function(options)
 		
 	socket.on(this.server_key, function(data)
 	{   
-		console.log(data);
+		console.log("data",data);
 		this.output=data
+		console.log("outp",this.output);
+
 	});
 	
 
