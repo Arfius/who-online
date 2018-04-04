@@ -5,6 +5,7 @@ var server = require('http').createServer(app);
 var io = require('socket.io')(server);
 var _ = require('underscore');
 var sem = require('semaphore')(1);
+var debug = require('debug')('WhoOnline:')
 
 var timer = 5000;
 var refresh = 10000;
@@ -40,8 +41,8 @@ var run = function()
 				result.online.push({id:id_client, time:new Date().getTime() });
 				result.live.push({id:id_client, time:new Date().getTime() });	
 				
-				/*console.log("Connection-result.live",result.live);
-				console.log("Connection-result.online",result.online);*/
+				debug("Connection-result.live",result.live);
+				debug("Connection-result.online",result.online);
 				
 				client.emit(server_key,result);
 				sem.leave();
@@ -56,8 +57,8 @@ var run = function()
 				result.online = _.reject(result.online,function(item){ return item.id== id_client;});
 				result.live = _.reject(result.live,function(item){ return item.id== id_client;});
 				
-				/*console.log("Disconnection-result.live",result.live);
-				console.log("Disconnection-result.online",result.online);*/
+				debug("Disconnection-result.live",result.live);
+				debug("Disconnection-result.online",result.online);
 				
 				client.emit(server_key,result);
 				sem.leave();
@@ -71,8 +72,8 @@ var run = function()
 				console.log("moving",id_client);
 				result.live=_.reject(result.live,function(item){ return item.id == id_client;});
 				result.live.push({id:id_client, time:new Date().getTime()});
-				/*console.log("Moving-result.live",result.live);
-				console.log("Moving-result.online",result.online);*/
+				debug("Moving-result.live",result.live);
+				debug("Moving-result.online",result.online);
 				sem.leave();
 			});
 		});
@@ -91,8 +92,8 @@ var run = function()
 				}
 				client.emit(server_key,result);
 				
-				/*console.log("eraseMoving-result.live",result.live);
-				console.log("eraseMoving-result.online",result.online);*/
+				debug("eraseMoving-result.live",result.live);
+				debug("eraseMoving-result.online",result.online);
 				
 				sem.leave();
 				setTimeout( eraseMoving, timer);
