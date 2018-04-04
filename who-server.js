@@ -27,7 +27,8 @@ var WhoServer = function(options)
 	
 		
 	socket.on(this.server_key, function(data)
-	{    	
+	{   
+		console.log(data);
 		this.output=data
 	});
 	
