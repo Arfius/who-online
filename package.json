@@ -1,6 +1,6 @@
 {
   "name": "who-online",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Check if User is online",
   "main": "server.js",
   "author": "Alfonso Farruggia",
