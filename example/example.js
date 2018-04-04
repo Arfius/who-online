@@ -8,7 +8,7 @@ var options=
 {
 	timer:5000,
 	refresh:10000,
-	porta:4200,
+	port:4200,
 	server_key:"my_key_server"
 }
 

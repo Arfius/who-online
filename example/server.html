@@ -20,10 +20,11 @@
 				id_client:"server-"+new Date().getTime(),
 				url_socket:"http://localhost:4200",
 				time_refresh:5000,
-				server_key:"my_key_server"
+				server_key:"my_key_server" //server_key
 			}
 			var whoserver = WhoServer(options);
 			whoserver.run();
+			//watch whoserver.output for data
         </script>
     </body>
 </html> 

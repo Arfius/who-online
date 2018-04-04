@@ -8,7 +8,7 @@ var sem = require('semaphore')(1);
 
 var timer = 5000;
 var refresh = 10000;
-var porta = 4200;
+var port = 4200;
 var server_key="server_key_string";
 
 var result=
@@ -21,7 +21,7 @@ var setConf= function(options)
 {
 	timer=options.timer,
 	refresh=options.refresh,
-	porta=options.porta,
+	port=options.port,
 	server_key=options.server_key
 }
 
@@ -40,8 +40,8 @@ var run = function()
 				result.online.push({id:id_client, time:new Date().getTime() });
 				result.live.push({id:id_client, time:new Date().getTime() });	
 				
-				console.log("Connection-result.live",result.live);
-				console.log("Connection-result.online",result.online);
+				/*console.log("Connection-result.live",result.live);
+				console.log("Connection-result.online",result.online);*/
 				
 				client.emit(server_key,result);
 				sem.leave();
@@ -56,8 +56,8 @@ var run = function()
 				result.online = _.reject(result.online,function(item){ return item.id== id_client;});
 				result.live = _.reject(result.live,function(item){ return item.id== id_client;});
 				
-				console.log("Disconnection-result.live",result.live);
-				console.log("Disconnection-result.online",result.online);
+				/*console.log("Disconnection-result.live",result.live);
+				console.log("Disconnection-result.online",result.online);*/
 				
 				client.emit(server_key,result);
 				sem.leave();
@@ -71,11 +71,8 @@ var run = function()
 				console.log("moving",id_client);
 				result.live=_.reject(result.live,function(item){ return item.id == id_client;});
 				result.live.push({id:id_client, time:new Date().getTime()});
-				
-				console.log("Moving-result.live",result.live);
-				console.log("Moving-result.online",result.online);
-
-
+				/*console.log("Moving-result.live",result.live);
+				console.log("Moving-result.online",result.online);*/
 				sem.leave();
 			});
 		});
@@ -94,8 +91,8 @@ var run = function()
 				}
 				client.emit(server_key,result);
 				
-				console.log("eraseMoving-result.live",result.live);
-				console.log("eraseMoving-result.online",result.online);
+				/*console.log("eraseMoving-result.live",result.live);
+				console.log("eraseMoving-result.online",result.online);*/
 				
 				sem.leave();
 				setTimeout( eraseMoving, timer);
@@ -107,7 +104,7 @@ var run = function()
 
 }
 
-	server.listen(porta); 
+	server.listen(port); 
 
 
 module.exports = {

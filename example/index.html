@@ -17,9 +17,9 @@
         <script>
 			var options = 
 			{
-				id_client:"client-"+new Date().getTime(),
-				url_socket:"http://localhost:4200",
-				time_refresh:5000,
+				id_client:"client-"+new Date().getTime(), //idClient
+				url_socket:"http://localhost:4200", //endPoint Socket
+				time_refresh:5000, //millisec
 			}
 			var whoclient = WhoClient(options);
 			whoclient.run();
