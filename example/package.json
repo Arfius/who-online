@@ -1,0 +1,15 @@
+{
+  "name": "who_online_example",
+  "version": "1.0.0",
+  "description": "example for who-online libs",
+  "main": "example.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.3",
+    "who-online": "file:///Users/alfonso/Documents/Sviluppo/utility/who-online"
+  }
+}
