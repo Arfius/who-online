@@ -1,9 +1,15 @@
 # Who-Online (o-O)
-**Who-Online (o-O)** tracks the on-line clients in your NodeJS application. The package is using on socket.io. For each tracked client, the live and online status and the last access are stored. The server page that show data receive an array composed of three objects: 
+**Who-Online (o-O)** tracks the on-line users in your NodeJS application. The package is using **socket.io** lib. For each tracked user, the *live* and *online* status and the last access are stored. There are three actors in the **Who-Online (o-O)** architecture:
 
-* live: list of objects of live user , the user is an active user 
-* online: list of objects of logged user, the user can be idle
-* last: list of objects with last access user informartion 
+* **Server**: manage the data of tracked  **UserAsClient** and dispact the information to the  **UserAsServer**
+* **UserAsClient**: identify the tracked client
+* **UserAsServer**: receive the information by the **Server**
+
+The **Server** sends the **UserAsClient**'s information to the **UserAsServer** as an array composed of three objects: 
+
+* **live**: list of json objects of live users, users are active on the web-page 
+* **online**: list of json objects of logged users, users can be idle
+* **last**: list of json objects with last access users informartion 
 
 `{live:[{...}], online:[{...}], last:[{...}]}`
 
@@ -23,8 +29,8 @@ var options=
 {
 	timer:5000, // millisec 
 	refresh:10000, // millisec after that a user state passes to idle 
-	port:4200, // port of socke.io
-	server_key:"my_key_server"
+	port:4200, // socke.io port 
+	server_key:"my_key_server" // unique id for the server
 }
 whoonline.Config(options);
 whoonline.Run();
