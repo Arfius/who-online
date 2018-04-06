@@ -1,9 +1,12 @@
 {
   "name": "who-online",
-  "version": "1.2.1",
-  "description": "Check if User is online",
+  "version": "1.2.2",
+  "description": "Who-Online (o-O) tracks the on-line clients in your NodeJS application.",
   "main": "server.js",
-  "author": "Alfonso Farruggia",
+  "author": {
+    "name": "Alfonso alfarruggia",
+    "email": "alfarruggia@gmail.com",
+  },
   "license": "ISC",
   "dependencies": {
     "debug": "^3.1.0",

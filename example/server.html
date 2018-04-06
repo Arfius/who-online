@@ -1,30 +1,31 @@
-<!doctype html>  
-<html lang="en">  
+<!doctype html>
+<html lang="en">
     <head>
 
     </head>
     <body>
-        <h1>Hello World!</h1>
-        <div id="future"></div>
-        <form id="form" id="chat_form">
-            <input id="chat_input" type="text">
-            <input type="submit" value="Send">
-        </form>
-        <script src="/socket.io-client/dist/socket.io.js"></script>  
+        <h1>Server</h1>
+        <textarea id="output_json" cols="150" rows="20"> </textarea>
+        <script src="/socket.io-client/dist/socket.io.js"></script>
         <script src="/who-online/who-server.js"></script>
-        
-        
-        <script>
-			var options = 
-			{
-				id_client:"server-"+new Date().getTime(),
-				url_socket:"http://localhost:4200",
-				time_refresh:5000,
-				server_key:"my_key_server" //server_key
-			}
-			var whoserver = WhoServer(options);
-			whoserver.run();
-			//watch whoserver.output for data
-        </script>
+
+
+      <script>
+            var callback= function(value){
+              var div = document.getElementById("output_json")
+              div.value=JSON.stringify(value);
+              console.log(div);
+            };
+      			var options =
+      			{
+      				id_client:"server-"+new Date().getTime(),
+      				url_socket:"http://localhost:4200",
+      				time_refresh:5000,
+      				server_key:"my_key_server", //server_key
+              output:callback
+      			}
+  			   var whoserver = WhoServer(options);
+			     whoserver.run();
+      </script>
     </body>
-</html> 
+</html>

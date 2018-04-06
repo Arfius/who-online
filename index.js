@@ -15,7 +15,7 @@ var server_key="server_key_string";
 var result=
 {
 	online:[],
-	live:[]
+	live:[],
 	last:[]
 };
 

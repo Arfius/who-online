@@ -1,28 +1,27 @@
-<!doctype html>  
-<html lang="en">  
+<!doctype html>
+<html lang="en">
     <head>
 
     </head>
     <body>
-        <h1>Hello World!</h1>
-        <div id="future"></div>
-        <form id="form" id="chat_form">
-            <input id="chat_input" type="text">
-            <input type="submit" value="Send">
-        </form>
-        <script src="/socket.io-client/dist/socket.io.js"></script>  
+        <h1>Client</h1>
+        <h4> </h4>
+
+        <script src="/socket.io-client/dist/socket.io.js"></script>
         <script src="/who-online/who-client.js"></script>
-        
-        
+
+
         <script>
-			var options = 
+			var options =
 			{
 				id_client:"client-"+new Date().getTime(), //idClient
 				url_socket:"http://localhost:4200", //endPoint Socket
 				time_refresh:5000, //millisec
 			}
 			var whoclient = WhoClient(options);
+
 			whoclient.run();
+
         </script>
     </body>
-</html> 
+</html>
