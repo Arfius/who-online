@@ -5,7 +5,7 @@
   "main": "server.js",
   "author": {
     "name": "Alfonso alfarruggia",
-    "email": "alfarruggia@gmail.com",
+    "email": "alfarruggia@gmail.com"
   },
   "license": "ISC",
   "dependencies": {
