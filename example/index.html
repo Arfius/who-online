@@ -1,27 +1,29 @@
 <!doctype html>
 <html lang="en">
     <head>
-
     </head>
     <body>
         <h1>Client</h1>
-        <h4> </h4>
+        <h4> <button onclick="stopping()">Stop Socket</button></h4>
+        <h6> After stop, to restart example, refresh the page </h6>
+
+
 
         <script src="/socket.io-client/dist/socket.io.js"></script>
         <script src="/who-online/who-client.js"></script>
-
-
         <script>
-			var options =
-			{
-				id_client:"client-"+new Date().getTime(), //idClient
-				url_socket:"http://localhost:4200", //endPoint Socket
-				time_refresh:5000, //millisec
-			}
-			var whoclient = WhoClient(options);
-
-			whoclient.run();
-
+          var options =
+          {
+            id_client:"client-"+new Date().getTime(), //idClient
+            url_socket:"http://localhost:4200", //endPoint Socket
+            time_refresh:5000, //millisec
+          }
+          var whoclient = WhoClient(options);
+          var stopping = function () {
+            whoclient.stop();
+          }
+          whoclient.run();
         </script>
+
     </body>
 </html>

@@ -29,7 +29,7 @@ var setConf= function(options)
 
 var run = function()
 {
-	console.log("[server_key]",server_key);
+	//console.log("[server_key]",server_key);
 
 	io.on('connection', function(client)
 	{
@@ -58,7 +58,7 @@ var run = function()
 		{
 			sem.take(function()
 			{
-				console.log("disconnect",id_client);
+				//console.log("disconnect",id_client);
 				result.online = _.reject(result.online,function(item){ return item.id== id_client;});
 				result.live = _.reject(result.live,function(item){ return item.id== id_client;});
 
@@ -74,7 +74,7 @@ var run = function()
 		{
 			sem.take(function()
 			{
-				console.log("moving",id_client);
+				//console.log("moving",id_client);
 				result.live=_.reject(result.live,function(item){ return item.id == id_client;});
 				result.live.push({id:id_client, time:new Date().getTime()});
 				//debug("Moving-result.live",result.live);

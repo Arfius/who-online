@@ -1,6 +1,6 @@
 {
   "name": "who-online",
-  "version": "1.2.2",
+  "version": "1.3.0",
   "description": "Who-Online (o-O) tracks the on-line clients in your NodeJS application.",
   "main": "server.js",
   "author": {
