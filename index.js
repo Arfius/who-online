@@ -77,6 +77,9 @@ var run = function()
 				//console.log("moving",id_client);
 				result.live=_.reject(result.live,function(item){ return item.id == id_client;});
 				result.live.push({id:id_client, time:new Date().getTime()});
+
+				result.last = _.reject(result.last,function(item){ return item.id== id_client;});
+				result.last.push({id:id_client, time:new Date().getTime() });
 				//debug("Moving-result.live",result.live);
 				//debug("Moving-result.online",result.online);
 				sem.leave();
