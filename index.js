@@ -30,32 +30,69 @@ var setConf= function(options)
 var run = function()
 {
 	//console.log("[server_key]",server_key);
-
 	io.on('connection', function(client)
 	{
 		var id_client="";
+		var authenticate = false;
+
+		io.on('who_authentation', function(_authenticate){
+			sem.take(function()
+			{
+				authenticate=_authenticate
+			})
+		});
+
 		client.on('join', function(data)
 		{
 			id_client=data;
-			sem.take(function()
-			{
-				result.online.push({id:id_client, time:new Date().getTime() });
-				result.live.push({id:id_client, time:new Date().getTime() });
 
-				//live
-				result.last = _.reject(result.last,function(item){ return item.id== id_client;});
-				result.last.push({id:id_client, time:new Date().getTime() });
+			if (authenticate == true){
+				sem.take(function()
+				{
+					result.online.push({id:id_client, time:new Date().getTime() });
+					result.live.push({id:id_client, time:new Date().getTime() });
 
-				//debug("Connection-result.live",result.live);
-				//debug("Connection-result.online",result.online);
+					//live
+					result.last = _.reject(result.last,function(item){ return item.id== id_client;});
+					result.last.push({id:id_client, time:new Date().getTime() });
 
-				client.emit(server_key,result);
-				sem.leave();
-			});
+					//debug("Connection-result.live",result.live);
+					//debug("Connection-result.online",result.online);
+
+					client.emit(server_key,result);
+					sem.leave();
+				});
+			} else {
+				disconnected();
+			}
 		});
 
 		client.on('disconnect', function ()
 		{
+			disconnected();
+		});
+
+		client.on('moving', function(data)
+		{
+			if (authenticate == true){
+				sem.take(function()
+				{
+					//console.log("moving",id_client);
+					result.live=_.reject(result.live,function(item){ return item.id == id_client;});
+					result.live.push({id:id_client, time:new Date().getTime()});
+
+					result.last = _.reject(result.last,function(item){ return item.id== id_client;});
+					result.last.push({id:id_client, time:new Date().getTime() });
+					//debug("Moving-result.live",result.live);
+					//debug("Moving-result.online",result.online);
+					sem.leave();
+				});
+			} else {
+				disconnected();
+			}
+		});
+
+		var disconnected = function(){
 			sem.take(function()
 			{
 				//console.log("disconnect",id_client);
@@ -68,23 +105,7 @@ var run = function()
 				client.emit(server_key,result);
 				sem.leave();
 			});
-		});
-
-		client.on('moving', function(data)
-		{
-			sem.take(function()
-			{
-				//console.log("moving",id_client);
-				result.live=_.reject(result.live,function(item){ return item.id == id_client;});
-				result.live.push({id:id_client, time:new Date().getTime()});
-
-				result.last = _.reject(result.last,function(item){ return item.id== id_client;});
-				result.last.push({id:id_client, time:new Date().getTime() });
-				//debug("Moving-result.live",result.live);
-				//debug("Moving-result.online",result.online);
-				sem.leave();
-			});
-		});
+		}
 
 		var eraseMoving = function()
 		{
